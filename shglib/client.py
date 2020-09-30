@@ -78,8 +78,8 @@ class CmdServerClient(object):
         ascii_txt = ascii_txt.decode('ascii')
         assert ascii_txt, "Expected hello message from server."
 
-        # Parse hello message.
-        capabilities, encoding = ascii_txt.split('\n')
+        # Parse hello message (see https://github.com/guillermooo/Mercurial/issues/5)
+        capabilities, encoding = ascii_txt.split('\n')[0:2]
         self.encoding = encoding.split(':')[1].strip().lower()
         self.capabilities = capabilities.split(':')[1].strip().split()
 
